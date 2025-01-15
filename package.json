@@ -1,10 +1,10 @@
 {
   "name": "complimentinator-cpp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A CLI to deliver overly enthusiastic compliments.",
   "main": "index.js",
   "bin": {
-    "complimentinator": "./index.js"
+    "complimentinator": "index.js"
   },
   "scripts": {
     "build": "node-gyp rebuild",
@@ -23,6 +23,10 @@
     "c++",
     "native"
   ],
+  "repository": {
+  "type": "git",
+  "url": "git+https://github.com/esmitt/complimentinator.git"
+  },
   "author": "Esmitt Ramirez",
   "license": "MIT"
 }
