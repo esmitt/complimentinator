@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const complimenter = require('./build/Release/addon'); // Path to your addon
+const complimenter = require('./build/Release/addon'); // be careful with this path
 const { Command } = require('commander');
 const program = new Command();
 
