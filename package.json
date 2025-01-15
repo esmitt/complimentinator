@@ -1,0 +1,28 @@
+{
+  "name": "complimentinator-cpp",
+  "version": "1.0.0",
+  "description": "A CLI to deliver overly enthusiastic compliments.",
+  "main": "index.js",
+  "bin": {
+    "complimentinator": "./index.js"
+  },
+  "scripts": {
+    "build": "node-gyp rebuild",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "commander": "^11.0.0",
+    "node-addon-api": "^6.0.0"
+  },
+  "gypfile": true,
+  "keywords": [
+    "compliment",
+    "motivational",
+    "funny",
+    "cli",
+    "c++",
+    "native"
+  ],
+  "author": "Esmitt Ramirez",
+  "license": "MIT"
+}

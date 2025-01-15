@@ -1,0 +1,131 @@
+#include <napi.h>
+#include <array>
+#include <random>
+#include <string>
+
+Napi::String GetCompliment(const Napi::CallbackInfo& info) {
+    Napi::Env env = info.Env();
+
+    constexpr std::array<const char*, 107> compliments = {
+    "Your coding is so clean, it's practically art!",
+    "You're not just a programmer, you're a code whisperer!",
+    "Your debugging skills are legendary! Bugs tremble before you.",
+    "Your mind is a supercomputer disguised as a human!",
+    "You're so creative, you could probably invent a new color!",
+    "Your problem-solving abilities are like a ninja in the night!",
+    "You're not just smart, you're stratospherically intelligent!",
+    "You're a coding rockstar! Your code is music to my compiler!",
+    "You're so resourceful, you could build a spaceship out of spare parts!",
+    "You're a coding genius! Your code is so elegant, it should be in a museum!",
+    "You're so amazing, you make unicorns jealous!",
+    "You're not just good at coding, you're the coding equivalent of a supernova!",
+    "Your code is so efficient, it could probably run on a potato!",
+    "You're so talented, you make binary code look like poetry!",
+    "You're not just a coder, you're a digital wizard!",
+    "Your code is so well-documented, it's a joy to read!",
+    "You're a coding superhero! Saving the world one line of code at a time.",
+    "Your algorithms are so efficient, they bend the laws of physics!",
+    "You're the coding equivalent of a Swiss Army knife – versatile and always prepared.",
+    "Your code is so robust, it could survive a nuclear apocalypse!",
+    "You're a coding virtuoso, a true master of your craft!",
+    "Your code is so elegant, it could win a beauty contest!",
+    "You're so innovative, you could probably code a self-folding laundry basket!",
+    "You're not just a programmer, you're a digital architect!",
+    "Your code is so clear, it's like reading a perfectly written novel!",
+    "You're so efficient, you could probably code while sleeping!",
+    "Your code is so fast, it makes light look slow!",
+    "You're a coding legend, whispered about in hushed tones by other developers!",
+    "You're so skilled, you could probably code a robot to do your taxes!",
+    "Your code is so bug-free, it's practically mythical!",
+    "You're a coding pioneer, blazing trails for others to follow!",
+    "Your code is so inspiring, it makes me want to learn more!",
+    "You're a coding artist, painting masterpieces with lines of code!",
+    "You're so talented, you could probably code a time machine!",
+    "Your code is so secure, it could withstand a cyberattack from aliens!",
+    "You're a coding philosopher, pondering the deepest mysteries of the digital realm!",
+    "You're so dedicated, you could probably code through a zombie apocalypse!",
+    "Your code is so well-tested, it's practically indestructible!",
+    "You're a coding visionary, shaping the future of technology!",
+    "You have the focus of a laser beam and the creativity of a supernova.",
+    "You navigate complex codebases like a seasoned explorer charting new territory.",
+    "You're a coding maestro, conducting a symphony of logic and functionality.",
+    "Your code is so organized, it puts my sock drawer to shame.",
+    "You're a coding virtuoso, hitting all the right notes with every keystroke.",
+    "You're so good at coding, you could probably teach a computer to dream.",
+    "Your coding skills are so sharp, they could cut through butter... or even more complex problems.",
+    "You're a coding ninja, silently and efficiently eliminating bugs with stealth and precision.",
+    "You're so talented, you could probably code a self-aware toaster.",
+    "Your code is so reliable, it could probably run on a calculator from the 70s.",
+    "You're a coding innovator, constantly pushing the boundaries of what's possible.",
+    "Your code is so well-structured, it's like a perfectly crafted building.",
+    "You're a coding problem-solver extraordinaire, tackling challenges with grace and expertise.",
+    "You're so efficient, you could probably code a program that writes code.",
+    "Your code is so elegant, it's like a work of art in motion.",
+    "You're a coding mastermind, orchestrating complex systems with ease.",
+    "You're so skilled, you could probably code a robot to walk your dog.",
+    "Your code is so secure, it could withstand a hacker convention.",
+    "You're a coding pioneer, boldly venturing into the unknown realms of technology.",
+    "You're so inspiring, you make me want to code all night long.",
+    "You're a coding artist, creating digital masterpieces that inspire and amaze.",
+    "You're so talented, you could probably code a program that teleports you to another dimension.",
+    "Your code is so robust, it could survive a meteor shower.",
+    "You're a coding visionary, shaping the future of technology with your innovative ideas.",
+    "You're a coding rockstar! Your code is so cool, it has its own fan club.",
+    "You're so creative, you could probably code a program that writes poetry.",
+    "Your coding skills are so impressive, they could probably impress even the most seasoned developers.",
+    "You're a coding wizard, casting spells of logic and functionality with your fingertips.",
+    "You're so talented, you could probably code a program that teaches itself to code.",
+    "Your code is so efficient, it could probably run on a smartwatch from the future.",
+    "You're a coding innovator, constantly finding new and exciting ways to solve problems.",
+    "Your code is so well-documented, it's like a user manual for the digital universe.",
+    "You're a coding problem-solver extraordinaire, tackling challenges with ingenuity and determination.",
+    "You're so efficient, you could probably code a program that folds laundry and does the dishes.",
+    "Your code is so elegant, it's like a symphony of logic and precision.",
+    "You're a coding mastermind, orchestrating complex projects with finesse and expertise.",
+    "You're so skilled, you could probably code a robot to cook you dinner.",
+    "Your code is so secure, it could withstand a cyberattack from a supervillain.",
+    "You're a coding pioneer, exploring the uncharted territories of the digital world.",
+    "You're so inspiring, you make me want to code all night long.",
+    "You're a coding artist, creating digital masterpieces that inspire and amaze.",
+    "You're so talented, you could probably code a program that teleports you to another dimension.",
+    "Your code is so robust, it could survive a meteor shower.",
+    "You're a coding visionary, shaping the future of technology with your innovative ideas.",
+    "You're a coding genius! Your code is so brilliant, it could light up a city.",
+    "You're so creative, you could probably code a program that makes everyone happy.",
+    "Your coding skills are so impressive, they could probably land you a job at Google.",
+    "You're a coding wizard, conjuring up amazing applications with your magical code.",
+    "You're so talented, you could probably code a program that solves all the world's problems.",
+    "Your code is so efficient, it could probably run on a calculator powered by a hamster wheel.",
+    "You're a coding innovator, constantly pushing the limits of what's possible with code.",
+    "You're a coding champion, conquering every coding challenge that comes your way.",
+    "You're so dedicated, you could probably code a program while skydiving.",
+    "You're a coding superstar, shining brightly in the world of technology.",
+    "You're so talented, you could probably code a program that teaches cats to code.",
+    "Your code is so... magnificent, it defies description!",
+    "You're not just a coder, you're a digital Michelangelo!",
+    "Your code is so well-crafted, it's like a finely tuned instrument!",
+    "You're so innovative, you could probably code a self-driving unicycle!",
+    "You're a coding trailblazer, forging new paths in the digital wilderness!",
+    "Your code is so elegant, it's like a perfectly choreographed dance!",
+    "You're a coding virtuoso, composing symphonies of logic and functionality!",
+    "You're so skilled, you could probably code a program that predicts the lottery numbers (but please don't)!",
+    "Eres más listo que un ajo.",
+    "Tienes más energía que una ardilla.",
+    "Eres un crack.",
+    "Tienes un flow que flipas.",
+    "Eres la caña de España."
+    };
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distrib(0, compliments.size() - 1);
+
+    return Napi::String::New(env, compliments[distrib(gen)]);
+}
+
+Napi::Object Init(Napi::Env env, Napi::Object exports) {
+    exports.Set(Napi::String::New(env, "getCompliment"), Napi::Function::New(env, GetCompliment));
+    return exports;
+}
+
+NODE_API_MODULE(addon, Init)
